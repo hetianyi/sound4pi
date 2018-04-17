@@ -1,6 +1,4 @@
 #! /bin/bash
-source /etc/profile
-echo $JAVA_HOME
 ZOOBIN="${BASH_SOURCE-$0}"
 ZOOBIN="$(dirname "${ZOOBIN}")"
 ZOOCMD=$ZOOBIN/sound4pi.jar
