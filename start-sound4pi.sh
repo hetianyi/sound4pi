@@ -1,5 +1,4 @@
 #! /bin/bash
-
 source /etc/profile
 echo $JAVA_HOME
 ZOOBIN="${BASH_SOURCE-$0}"

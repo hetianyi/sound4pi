@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
 
 
-    <name>springboot-demo</name>
+    <name>sound4pi</name>
     <description>Java mp3 player on raspberry platform.</description>
 
 

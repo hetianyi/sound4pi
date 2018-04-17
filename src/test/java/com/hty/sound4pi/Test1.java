@@ -8,8 +8,8 @@ public class Test1 {
 	public static void main(String[] args) throws Exception {
 		
 		Socket s = new Socket("localhost", 7400);
-		String msg = "{appId:'test', join:'true', type:'1', wait:'true', data:'你叫什么什么名字呀'}";
-		//String msg = "{appId:'test', join:'true', type:'2', wait:'false', data:'D:/123.mp3'}";
+		//String msg = "{appId:'test', join:'true', type:'1', wait:'true', data:'你叫什么什么名字呀'}";
+		String msg = "{appId:'test', join:'true', type:'2', wait:'false', data:'G:/CloudMusic/1994.mp3'}";
 		s.getOutputStream().write(msg.getBytes("UTF-8"));
 		s.shutdownOutput();
 		byte[] bs = new byte[1024];
