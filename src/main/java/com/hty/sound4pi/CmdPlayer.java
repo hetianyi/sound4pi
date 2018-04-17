@@ -1,17 +1,22 @@
 package com.hty.sound4pi;
 
+import com.hty.sound4pi.util.PropertiesUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
-import com.hty.sound4pi.util.PropertiesUtil;
 /**
  * 命令行操作类，控制独立线程播放音乐的暂停和开始，以及播放自定义文本合成的语音
  * @author Hetianyi
  */
 public class CmdPlayer {
+	private static final Log logger = LogFactory.getLog(CmdPlayer.class);
+
 	//系统属性配置类
 	private static PropertiesUtil putil;
 	
@@ -48,7 +53,7 @@ public class CmdPlayer {
 					sendRequest(msg);
 					return null;
 				} else {
-					System.out.println("\n 请输入要播放的话。");
+					logger.warn("\n Please input the words you want synthetic.");
 					showUsage();
 					return null;
 				}
@@ -58,13 +63,13 @@ public class CmdPlayer {
 			
 			File file = new File(path);
 			if(!file.exists() || file.isDirectory() || !file.getName().endsWith(".mp3")) {
-				System.out.println("\n " + file.getAbsolutePath() + " 不存在或不是有效的mp3文件.");
+				logger.warn("\n " + file.getAbsolutePath() + " doesn't exists or it is not a valid mp3 file.");
 				showUsage();
 				return null;
 			}
 			return file;
 		}
-		System.out.println("\n 没有指定播放的文件");
+		logger.warn("\n You didn't specific a file to play!");
 		showUsage();
 		System.exit(0);
 		return null;
@@ -82,7 +87,7 @@ public class CmdPlayer {
 		}
 		s.shutdownInput();
 		s.close();
-		System.out.println("已请求，请稍候...");
+		logger.info("Request has sent, please wait a minute.");
 	}
 	
 	private static void showUsage() {
@@ -117,7 +122,7 @@ public class CmdPlayer {
 		classpath = new File(System.getProperty("java.class.path")).getParentFile();
 		configFile = parseConfigFile(args);
 		if(!configFile.exists() || configFile.isDirectory()  || !configFile.getName().endsWith("properties")) {
-			throw new IllegalArgumentException("无效的配置文件：" + configFile.getAbsolutePath());
+			throw new IllegalArgumentException("Invalid configuration file: " + configFile.getAbsolutePath());
 		}
 		putil = new PropertiesUtil(configFile);
 		setPort();

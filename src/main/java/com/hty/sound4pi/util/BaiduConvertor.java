@@ -1,14 +1,19 @@
 package com.hty.sound4pi.util;
 
-import java.util.HashMap;
-
 import com.baidu.aip.speech.AipSpeech;
 import com.baidu.aip.speech.TtsResponse;
 import com.hty.sound4pi.Main;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.util.HashMap;
 
 public class BaiduConvertor {
-    
-	public static byte[] convert(String words) {
+
+    private static final Log logger = LogFactory.getLog(BaiduConvertor.class);
+
+
+    public static byte[] convert(String words) {
 		PropertiesUtil putil = Main.getPropertiesUtil();
 		// 初始化一个AipSpeech
         AipSpeech client = new AipSpeech(putil.getProperty("AppID"), putil.getProperty("APIKey"), putil.getProperty("SecretKey"));
@@ -31,9 +36,9 @@ public class BaiduConvertor {
         byte[] data = res.getData();
         org.json.JSONObject result = res.getResult();
         if(null != data) {
-        	System.out.println("合成成功：" + words);
+            logger.info("Synthetic success for words: \"" + words + "\"");
         } else {
-        	System.out.println("合成失败：" + result.toString());
+            logger.error("Synthetic failed for words: \"" + words + "\"");
         }
         return data;
 	}

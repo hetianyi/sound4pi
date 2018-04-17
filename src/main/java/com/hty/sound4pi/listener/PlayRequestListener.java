@@ -1,15 +1,20 @@
 package com.hty.sound4pi.listener;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class PlayRequestListener implements Runnable {
-	
+
+	private static final Log logger = LogFactory.getLog(PlayRequestListener.class);
+
 	private int port;
 	
 	public PlayRequestListener(int port) {
-		System.out.println("启动监听服务...");
+		logger.info("Start listener service...");
 		this.port = port;
 	}
 	
@@ -19,14 +24,14 @@ public class PlayRequestListener implements Runnable {
 		try {
 			ss = new ServerSocket(port);
 			while(true) {
-				System.out.println("正在监听...");
+				logger.info("Listening now.");
 				Socket s = ss.accept();
-				System.out.println("收到请求");
+				logger.info("Get play request.");
 				Thread t = new Thread(new RequestSocketHandler(s));
 				t.start();
 			}
 		} catch (IOException e) {
-			System.out.println("监听服务启动失败...");
+			logger.error("Start listener service failed.");
 			e.printStackTrace();
 			System.exit(0);
 		} finally {

@@ -88,27 +88,27 @@ public class Main {
 	private static void checkConfig() {
 		String AppID = putil.getProperty("AppID");
 		if(StringUtil.isEmpty(AppID)) {
-			throw new IllegalArgumentException("参数错误：无效的AppID");
+			throw new IllegalArgumentException("Parameter wrong: invalid AppID");
 		}
 		String APIKey = putil.getProperty("APIKey");
 		if(StringUtil.isEmpty(APIKey)) {
-			throw new IllegalArgumentException("参数错误：无效的APIKey");
+			throw new IllegalArgumentException("Parameter wrong：invalid APIKey");
 		}
 		String SecretKey = putil.getProperty("SecretKey");
 		if(StringUtil.isEmpty(SecretKey)) {
-			throw new IllegalArgumentException("参数错误：无效的SecretKey");
+			throw new IllegalArgumentException("Parameter wrong：invalid SecretKey");
 		}
 		String spd = putil.getProperty("spd");
 		if(StringUtil.isEmpty(spd) || !spd.trim().matches("[0-9]")) {
-			throw new IllegalArgumentException("参数错误：spd必须是0-9的数字");
+			throw new IllegalArgumentException("Parameter wrong：spd must be a number between 0 and 9.");
 		}
 		String pit = putil.getProperty("pit");
 		if(StringUtil.isEmpty(pit) || !pit.trim().matches("[0-9]")) {
-			throw new IllegalArgumentException("参数错误：pit必须是0-9的数字");
+			throw new IllegalArgumentException("Parameter wrong：pit must be a number between 0 and 9.");
 		}
 		String per = putil.getProperty("per");
 		if(StringUtil.isEmpty(per) || !per.trim().matches("[0-4]")) {
-			throw new IllegalArgumentException("参数错误：per必须是0-4的数字");
+			throw new IllegalArgumentException("Parameter wrong：per must be a number between 0 and 4.");
 		}
 	}
 	
@@ -116,7 +116,7 @@ public class Main {
 		classpath = new File(System.getProperty("java.class.path")).getParentFile();
 		configFile = parseConfigFile();
 		if(!configFile.exists() || configFile.isDirectory()  || !configFile.getName().endsWith("properties")) {
-			throw new IllegalArgumentException("无效的配置文件：" + configFile.getAbsolutePath());
+			throw new IllegalArgumentException("Invalid configuration file: " + configFile.getAbsolutePath());
 		}
 		createTempDir();
 		putil = new PropertiesUtil(configFile);
